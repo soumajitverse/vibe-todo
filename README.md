@@ -2,6 +2,11 @@
 
 A modern, responsive, mobile-first Todo web application built with **React (Vite + Tailwind CSS)**, **Node.js/Express.js**, and **NeonDB (Serverless PostgreSQL)**.
 
+### 🌐 Live Production Deployments
+- **Frontend (Vercel):** [https://vibe-todo-gray.vercel.app](https://vibe-todo-gray.vercel.app/login)
+- **Backend API (Render):** [https://vibe-todo-7rhs.onrender.com](https://vibe-todo-7rhs.onrender.com)
+- **Health Check Status:** [https://vibe-todo-7rhs.onrender.com/health](https://vibe-todo-7rhs.onrender.com/health)
+
 ---
 
 ## 🌟 Features & Highlights
