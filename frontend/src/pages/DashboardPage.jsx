@@ -126,14 +126,14 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 selection:bg-brand-500 selection:text-white pb-24 sm:pb-12">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-brand-500 selection:text-white pb-24 sm:pb-12 transition-colors">
       {/* Top Navbar */}
       <Navbar />
 
       {/* Floating Toast Notification */}
       {toastMessage && (
         <div className="fixed top-16 left-1/2 z-50 animate-fade-in-down">
-          <div className="bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl flex items-center space-x-2 border border-slate-700">
+          <div className="bg-slate-900 dark:bg-slate-800 text-white text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl flex items-center space-x-2 border border-slate-700 dark:border-slate-600">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             <span>{toastMessage}</span>
           </div>
@@ -143,11 +143,11 @@ export default function DashboardPage() {
       {/* Main Container */}
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 pt-5">
         {/* Controls Card: Search + Desktop Action */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-3 sm:p-4 mb-4">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm p-3 sm:p-4 mb-4 transition-colors">
           <div className="flex items-center space-x-2">
             {/* Search Input */}
             <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
                 <Search className="w-4 h-4" />
               </div>
               <input
@@ -155,12 +155,12 @@ export default function DashboardPage() {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search tasks by title or details..."
-                className="w-full pl-10 pr-9 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium"
+                className="w-full pl-10 pr-9 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500"
               />
               {searchInput && (
                 <button
                   onClick={() => setSearchInput('')}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -173,7 +173,7 @@ export default function DashboardPage() {
                 setEditingTodo(null);
                 setIsModalOpen(true);
               }}
-              className="hidden sm:flex items-center space-x-1.5 px-4 py-2.5 bg-brand-600 text-white text-sm font-bold rounded-xl shadow-sm hover:bg-brand-700 active:scale-95 transition shrink-0"
+              className="hidden sm:flex items-center space-x-1.5 px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold rounded-xl shadow-sm active:scale-95 transition shrink-0"
             >
               <Plus className="w-4 h-4 stroke-[2.5]" />
               <span>New Task</span>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Desktop Filter Tabs */}
-          <div className="hidden sm:flex items-center justify-between mt-3 pt-3 border-t border-slate-100 text-xs">
+          <div className="hidden sm:flex items-center justify-between mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
             <div className="flex items-center space-x-1">
               {[
                 { id: 'all', label: 'All Tasks' },
@@ -193,8 +193,8 @@ export default function DashboardPage() {
                   onClick={() => setFilter(f.id)}
                   className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
                     filter === f.id
-                      ? 'bg-brand-50 text-brand-700'
-                      : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
+                      ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300'
+                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
                   }`}
                 >
                   {f.label}
@@ -202,7 +202,7 @@ export default function DashboardPage() {
               ))}
             </div>
 
-            <div className="text-slate-400 font-medium">
+            <div className="text-slate-400 dark:text-slate-500 font-medium">
               Total {total} tasks
             </div>
           </div>
@@ -210,14 +210,14 @@ export default function DashboardPage() {
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-4 p-4 rounded-2xl bg-red-50 border border-red-200/80 text-red-700 text-sm flex items-center justify-between">
+          <div className="mb-4 p-4 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/60 text-red-700 dark:text-red-300 text-sm flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
               <span className="font-medium">{error}</span>
             </div>
             <button
               onClick={fetchTodos}
-              className="px-3 py-1 bg-white border border-red-200 rounded-lg text-xs font-bold text-red-600 hover:bg-red-50 transition flex items-center space-x-1 shrink-0"
+              className="px-3 py-1 bg-white dark:bg-slate-800 border border-red-200 dark:border-red-900/80 rounded-lg text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/60 transition flex items-center space-x-1 shrink-0"
             >
               <RefreshCw className="w-3 h-3" />
               <span>Retry</span>

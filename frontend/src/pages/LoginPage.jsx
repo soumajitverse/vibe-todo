@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useServerHealth } from '../context/ServerHealthContext';
 import { CheckSquare, Lock, Mail, Eye, EyeOff, Loader2 } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -37,7 +38,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-8 bg-slate-50">
+    <div className="min-h-screen flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors relative">
+      {/* Top right Theme Toggle */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+        <ThemeToggle />
+      </div>
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         {/* Brand Header */}
         <div className="flex justify-center mb-3">
@@ -45,29 +51,29 @@ export default function LoginPage() {
             <CheckSquare className="w-7 h-7 stroke-[2.5]" />
           </div>
         </div>
-        <h2 className="text-center text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h2 className="text-center text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Welcome back
         </h2>
-        <p className="mt-1.5 text-center text-sm text-slate-500">
+        <p className="mt-1.5 text-center text-sm text-slate-500 dark:text-slate-400">
           Sign in to manage your tasks anywhere, anytime.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-5 shadow-card rounded-3xl border border-slate-200/80 sm:px-10">
+        <div className="bg-white dark:bg-slate-900 py-8 px-5 shadow-card rounded-3xl border border-slate-200/80 dark:border-slate-800 sm:px-10 transition-colors">
           {error && (
-            <div className="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200/80 text-red-600 text-xs sm:text-sm font-semibold flex items-center">
+            <div className="mb-5 p-3.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/60 text-red-600 dark:text-red-400 text-xs sm:text-sm font-semibold flex items-center">
               <span>{error}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
                   <Mail className="w-4 h-4" />
                 </div>
                 <input
@@ -77,17 +83,17 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   autoComplete="email"
-                  className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium"
+                  className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
                   <Lock className="w-4 h-4" />
                 </div>
                 <input
@@ -97,12 +103,12 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-10 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium"
+                  className="w-full pl-10 pr-10 py-2.5 text-sm rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -133,9 +139,9 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-xs sm:text-sm text-slate-500">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Don't have an account?{' '}
-              <Link to="/signup" className="font-bold text-brand-600 hover:text-brand-700">
+              <Link to="/signup" className="font-bold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300">
                 Sign up free
               </Link>
             </p>

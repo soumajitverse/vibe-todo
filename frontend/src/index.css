@@ -13,6 +13,12 @@ body {
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
+/* Dark mode default backgrounds */
+html.dark body {
+  background-color: #020617; /* slate-950 */
+  color: #f8fafc; /* slate-50 */
+}
+
 /* Mobile-friendly safe area utility */
 .pb-safe {
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 16px));
@@ -41,6 +47,14 @@ body {
   background: rgba(100, 116, 139, 0.6);
 }
 
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.8);
+}
+
 /* Smooth modal bottom-sheet and toast transitions */
 @keyframes slideUp {
   from {
@@ -60,7 +74,6 @@ body {
   }
   to {
     transform: translate(-50%, 0);
-    opacity: 1;
   }
 }
 

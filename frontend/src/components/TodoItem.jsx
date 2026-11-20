@@ -41,8 +41,8 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
     <div
       className={`group relative p-4 rounded-2xl border transition-all duration-200 ${
         todo.completed
-          ? 'bg-slate-50/80 border-slate-200/60 opacity-80'
-          : 'bg-white border-slate-200/90 shadow-card hover:border-brand-200 hover:shadow-md'
+          ? 'bg-slate-50/80 dark:bg-slate-900/40 border-slate-200/60 dark:border-slate-800/60 opacity-80'
+          : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800/90 shadow-card hover:border-brand-200 dark:hover:border-brand-700/60 hover:shadow-md'
       } ${isUpdating || isDeleting ? 'pointer-events-none opacity-50' : ''}`}
     >
       <div className="flex items-start space-x-3.5">
@@ -54,7 +54,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
           className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-200 border mt-0.5 min-w-[28px] min-h-[28px] focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 active:scale-90 ${
             todo.completed
               ? 'bg-emerald-500 border-emerald-500 text-white shadow-sm shadow-emerald-500/20'
-              : 'border-slate-300 bg-slate-50 hover:border-brand-500 hover:bg-brand-50/50 text-transparent'
+              : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 hover:border-brand-500 hover:bg-brand-50/50 dark:hover:bg-brand-950/40 text-transparent'
           }`}
         >
           <Check className={`w-4 h-4 stroke-[3] transition-transform ${todo.completed ? 'scale-100' : 'scale-50'}`} />
@@ -64,7 +64,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
         <div className="flex-1 min-w-0" onClick={handleToggle} role="button" tabIndex={0}>
           <h4
             className={`text-sm sm:text-base font-semibold leading-snug break-words transition-all ${
-              todo.completed ? 'text-slate-400 line-through' : 'text-slate-800'
+              todo.completed ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-800 dark:text-slate-100'
             }`}
           >
             {todo.title}
@@ -73,7 +73,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
           {todo.description && (
             <p
               className={`text-xs sm:text-sm mt-1 line-clamp-2 break-words leading-relaxed ${
-                todo.completed ? 'text-slate-400 line-through' : 'text-slate-500'
+                todo.completed ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-500 dark:text-slate-400'
               }`}
             >
               {todo.description}
@@ -81,14 +81,14 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
           )}
 
           {/* Metadata Footer */}
-          <div className="flex items-center space-x-2 mt-2 text-[11px] text-slate-400">
+          <div className="flex items-center space-x-2 mt-2 text-[11px] text-slate-400 dark:text-slate-500">
             <span className="flex items-center space-x-1">
-              <Calendar className="w-3 h-3 text-slate-400" />
+              <Calendar className="w-3 h-3 text-slate-400 dark:text-slate-500" />
               <span>{formatDate(todo.created_at)}</span>
             </span>
 
             {todo.completed && (
-              <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 text-emerald-600 font-medium">
+              <span className="px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 font-medium">
                 Done
               </span>
             )}
@@ -101,7 +101,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
             type="button"
             onClick={() => onEdit(todo)}
             aria-label="Edit todo"
-            className="w-9 h-9 flex items-center justify-center rounded-xl text-slate-400 hover:text-brand-600 hover:bg-brand-50 active:scale-95 transition"
+            className="w-9 h-9 flex items-center justify-center rounded-xl text-slate-400 dark:text-slate-500 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/50 active:scale-95 transition"
           >
             <Edit2 className="w-4 h-4" />
           </button>
@@ -110,7 +110,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
             type="button"
             onClick={handleDelete}
             aria-label="Delete todo"
-            className="w-9 h-9 flex items-center justify-center rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 active:scale-95 transition"
+            className="w-9 h-9 flex items-center justify-center rounded-xl text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 active:scale-95 transition"
           >
             <Trash2 className="w-4 h-4" />
           </button>

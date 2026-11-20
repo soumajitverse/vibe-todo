@@ -9,18 +9,18 @@ export default function BottomBar({ onAddNew, activeFilter, onFilterChange }) {
   ];
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/80 px-4 py-2.5 pb-safe sm:hidden shadow-lg shadow-slate-900/10">
+    <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200/80 dark:border-slate-800 px-4 py-2.5 pb-safe sm:hidden shadow-lg shadow-slate-900/10">
       <div className="flex items-center justify-between max-w-md mx-auto">
         {/* Thumb-friendly Filter Pills */}
-        <div className="flex items-center bg-slate-100 p-1 rounded-xl space-x-1">
+        <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl space-x-1">
           {filters.map((f) => (
             <button
               key={f.id}
               onClick={() => onFilterChange(f.id)}
               className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${
                 activeFilter === f.id
-                  ? 'bg-white text-brand-700 shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white dark:bg-slate-700 text-brand-700 dark:text-brand-300 shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {f.label}
