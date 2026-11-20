@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useServerHealth } from '../context/ServerHealthContext';
 import { CheckSquare, Lock, Mail, Eye, EyeOff, Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useAuth();
+  const { isWakingUp } = useServerHealth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -110,10 +112,15 @@ export default function LoginPage() {
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={isLoading}
-                className="w-full min-h-[48px] py-3 px-4 rounded-xl text-white font-bold text-sm bg-brand-600 hover:bg-brand-700 active:scale-95 shadow-md shadow-brand-500/25 transition flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isLoading || isWakingUp}
+                className="w-full min-h-[48px] py-3 px-4 rounded-xl text-white font-bold text-sm bg-brand-600 hover:bg-brand-700 active:scale-95 shadow-md shadow-brand-500/25 transition flex items-center justify-center space-x-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {isLoading ? (
+                {isWakingUp ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Server waking up, please wait...</span>
+                  </>
+                ) : isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span>Signing in...</span>

@@ -9,7 +9,14 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 30000, // 30s timeout to allow Render wakeups
 });
+
+let onServerWakeUpCallback = null;
+
+export const registerServerWakeUpCallback = (callback) => {
+  onServerWakeUpCallback = callback;
+};
 
 // Interceptor to attach Authorization Bearer token to requests
 api.interceptors.request.use(
@@ -23,19 +30,29 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Interceptor to handle unauthorized 401 responses
+// Interceptor to handle errors, cold starts, and 401s
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    const isNetworkOrTimeout = !error.response || error.code === 'ECONNABORTED';
+    const isServerWakingError = error.response && [502, 503, 504].includes(error.response.status);
+
+    // If backend is sleeping / cold starting, trigger wake-up polling banner
+    if ((isNetworkOrTimeout || isServerWakingError) && !error.config?.url?.includes('/health')) {
+      if (typeof onServerWakeUpCallback === 'function') {
+        onServerWakeUpCallback();
+      }
+    }
+
     if (error.response && error.response.status === 401) {
       // Clear token if expired or invalid
       localStorage.removeItem('vibe_token');
       localStorage.removeItem('vibe_user');
-      // If not already on login or signup page, reload or let AuthContext handle state
       if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/signup')) {
         window.location.href = '/login';
       }
     }
+
     return Promise.reject(error);
   }
 );
